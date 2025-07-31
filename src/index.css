@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@property --color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #333;
+}
+
+@layer base {
+  :root {
+    /* overflow: hidden; */
+    @apply text-[rgba(255,255,255,0.87)] bg-[var(--color)] font-sans;
+  }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  min-height: 100vi;
+  background: var(--color) url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" fill-opacity="0.25"><rect x="200" width="200" height="200" /><rect y="200" width="200" height="200" /></svg>');
+  transform: rotate(-12deg) scale(1.35);
+  animation: slide 60s linear infinite;
+  pointer-events: none;
+  transition: --color 1000ms;
+}
+
+@keyframes slide {
+  from {
+    background-position: -800px -400;
+  }
+  to {
+    background-position: 800px 400px;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion) {
+  *,
+  ::before,
+  ::after {
+    animation: none !important;
+  }
+}
