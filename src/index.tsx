@@ -6,6 +6,7 @@ const server = serve({
     // Serve index.html for all unmatched routes.
     "/*": index,
 
+    /*
     "/api/hello": {
       async GET(req) {
         return Response.json({
@@ -27,6 +28,11 @@ const server = serve({
         message: `Hello, ${name}!`,
       });
     },
+    */
+  },
+
+  fetch(req, s) {
+    if (s.upgrade(req)) return;
   },
 
   development: process.env.NODE_ENV !== "production" && {
@@ -36,6 +42,18 @@ const server = serve({
     // Echo console logs from the browser to the server
     console: true,
   },
+
+  websocket: {
+    open(ws) {
+
+    },
+    close(ws, code, reason) {
+
+    },
+    message(ws, message) {
+
+    }
+  }
 });
 
 console.log(`🚀 Server running at ${server.url}`);
